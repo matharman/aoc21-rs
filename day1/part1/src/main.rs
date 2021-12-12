@@ -33,8 +33,8 @@ fn get_increased_from_file(path: &str) -> u32 {
 }
 
 fn main() {
-    let sample = "day1/part1/sample.txt";
-    let data = "day1/part1/depth.txt";
+    let sample = "day1/etc/sample.txt";
+    let data = "day1/etc/depth.txt";
     println!(
         "increased for {}: {}",
         sample,
