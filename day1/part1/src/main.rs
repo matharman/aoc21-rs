@@ -19,15 +19,17 @@ fn get_increased_from_file(path: &str) -> u32 {
     let path = std::path::PathBuf::from(path);
     let data = get_depth_input(path).unwrap();
 
-    let mut increased: u32 = 0;
-
-    for i in 1..data.len() {
-        if data[i - 1] < data[i] {
-            increased += 1;
-        }
-    }
-
-    increased
+    data[..data.len() - 1]
+        .iter()
+        .zip(data[1..].iter())
+        .fold(0, |acc, x| {
+            let (x0, x1) = x;
+            if x0 < x1 {
+                acc + 1
+            } else {
+                acc
+            }
+        })
 }
 
 fn main() {
