@@ -1,5 +1,3 @@
-#![allow(dead_code)]
-
 use std::io::{BufRead, Result as IOResult};
 use std::path::PathBuf;
 
