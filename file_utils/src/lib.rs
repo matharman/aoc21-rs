@@ -1,3 +1,4 @@
+use std::fs::OpenOptions;
 use std::io::{self, BufRead};
 
 pub struct LineReader<'a> {
@@ -9,9 +10,13 @@ pub type Result<T> = io::Result<T>;
 
 impl<'a> LineReader<'a> {
     pub fn open(path: &'a str) -> Result<Self> {
-        let f = std::fs::File::open(path)?;
+        let f = OpenOptions::new().read(true).open(path)?;
         let inner = std::io::BufReader::new(f).lines();
         Ok(Self { name: path, inner })
+    }
+
+    pub fn dup(&self) -> Result<Self> {
+        LineReader::open(self.name)
     }
 
     pub fn name(&self) -> &str {
